@@ -13,6 +13,12 @@ export default function Home() {
   const [selectedSide, setSelectedSide] = useState<Side>('client');
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
+  // Reset category when side changes
+  const handleSideChange = (side: Side) => {
+    setSelectedSide(side);
+    setSelectedCategory(null);
+  };
+
   // Filter assistants
   const filteredAssistants = useMemo(() => {
     return assistants.filter((a) => {
@@ -47,8 +53,12 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Controls */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <SideToggle selected={selectedSide} onSelect={setSelectedSide} />
-          <CategoryFilter selected={selectedCategory} onSelect={setSelectedCategory} />
+          <SideToggle selected={selectedSide} onSelect={handleSideChange} />
+          <CategoryFilter 
+            selected={selectedCategory} 
+            onSelect={setSelectedCategory} 
+            side={selectedSide}
+          />
         </div>
         
         {/* New Section */}

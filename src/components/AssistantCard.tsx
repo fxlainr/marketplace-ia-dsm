@@ -7,7 +7,7 @@ import {
   HeartPulse, TrendingUp, RotateCw, ClipboardCheck, AlertTriangle, MessageCircle,
   Map, Search, GraduationCap, Compass, Bot, LucideIcon
 } from 'lucide-react';
-import { Assistant, categoryConfig } from '@/data/assistants';
+import { Assistant, getCategoryConfig } from '@/data/assistants';
 
 const iconMap: Record<string, LucideIcon> = {
   Radar, Mail, Bell, Target, RefreshCw, Users, FileSearch, Calculator, Layers,
@@ -22,7 +22,7 @@ interface AssistantCardProps {
 }
 
 export function AssistantCard({ assistant }: AssistantCardProps) {
-  const config = categoryConfig[assistant.category];
+  const config = getCategoryConfig(assistant.category, assistant.side);
   const IconComponent = iconMap[assistant.icon] || Bot;
 
   return (
